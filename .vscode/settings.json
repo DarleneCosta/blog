@@ -21,6 +21,10 @@
     "typescript": "clear ; npx tsx"
   },
 
+  "code-runner.customCommand": "clear ; npx tsx",
+  "code-runner.executorMapByFileExtension": {
+    "typescript": "clear ; npx tsx"
+  },
   "tailwindCSS.experimental.classRegex": [
     ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
