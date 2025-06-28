@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import { PostsList } from '@/components/PostsList';
 import { SpinLoader } from '@/components/SpinLoader';
 import { Suspense } from 'react';
@@ -8,6 +10,18 @@ export default async function Home() {
   return (
     <Container>
       <Header />
+
+      <section>
+        <Link href='#'>
+          <Image
+            src='/images/bryen_0.png'
+            alt='Post 1'
+            width={1200}
+            height={720}
+            className='w-full h-auto'
+          />
+        </Link>
+      </section>
 
       <Suspense fallback={<SpinLoader />}>
         <PostsList />
