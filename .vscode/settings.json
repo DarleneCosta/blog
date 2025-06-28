@@ -20,15 +20,13 @@
   "code-runner.executorMap": {
     "typescript": "clear ; npx tsx"
   },
-
+  "tailwindCSS.experimental.classRegex": [
+    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ],
   "code-runner.customCommand": "clear ; npx tsx",
   "code-runner.executorMapByFileExtension": {
     "typescript": "clear ; npx tsx"
   },
-  "tailwindCSS.experimental.classRegex": [
-    ["clsx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
-  ],
-
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
 
