@@ -1,5 +1,21 @@
+import { PostsList } from '@/components/PostsList';
 import { SpinLoader } from '@/components/SpinLoader';
+import { Suspense } from 'react';
+  
+export default async function Home() {
+  return (
+    <>
+      <header>
+        <h1>Blog</h1>
+      </header>
 
-export default function Home() {
-  return <SpinLoader containerClasses='bg-amber-500' />;
+      <Suspense fallback={<SpinLoader />}>
+        <PostsList />
+      </Suspense>
+
+      <footer>
+        <p>Copyright 2025</p>
+      </footer>
+    </>
+  );
 }

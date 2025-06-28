@@ -5,9 +5,11 @@ import { resolve } from 'path';
 
 const ROOT_DIR = process.cwd();
 const JSON_POSTS_PATH = resolve(ROOT_DIR, 'src', 'db', 'seed', 'posts.json');
+const SIMULATE_DELAY = 5000;
 
 export class JsonPostRepository implements PostRepository {
   private async readFromDisk(): Promise<PostModel[]> {
+    await new Promise(resolve => setTimeout(resolve, SIMULATE_DELAY));
     const file = await readFile(JSON_POSTS_PATH, 'utf8');
     const { posts } = JSON.parse(file);
     return posts;
