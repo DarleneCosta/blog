@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import clsx from 'clsx';
 
 export const Header = () => {
@@ -11,9 +12,9 @@ export const Header = () => {
           'lg:text-7xl/normal lg:py-12',
         )}
       >
-        <a href='#' className='text-blue-500'>
+        <Link href='#' className='text-blue-500'>
           The Blog
-        </a>
+        </Link>
       </h1>
     </header>
   );
