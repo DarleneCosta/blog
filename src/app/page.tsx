@@ -5,6 +5,7 @@ import { SpinLoader } from '@/components/SpinLoader';
 import { Suspense } from 'react';
 import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
+import clsx from 'clsx';
 
 export default async function Home() {
   return (
@@ -18,15 +19,23 @@ export default async function Home() {
             alt='Post 1'
             width={1200}
             height={720}
-            className='group-hover:scale-105 transition-all duration-300'
+            priority
+            className={clsx(
+              'w-full h-full object-cover object-center',
+              'group-hover:scale-105 transition-all duration-300',
+              'sm:h-auto sm:w-auto sm:object-contain',
+            )}
           />
         </Link>
-        <Suspense fallback={<SpinLoader />}>
-          <PostsList />
-        </Suspense>
-        <div>
-          <time dateTime='2025-06-28'>2025-06-28</time>
-          <h1>
+
+        <div className='flex flex-col gap-4 sm:justify-center'>
+          <time
+            className='text-slate-600 block text-sm/tight'
+            dateTime='2025-06-28'
+          >
+            28 Jun 2025 at 10:00
+          </time>
+          <h1 className='text-2xl/tight mb-4 font-extrabold sm:text-4xl/tight'>
             <Link href='#'>Read more</Link>
           </h1>
           <p>
@@ -35,6 +44,9 @@ export default async function Home() {
           </p>
         </div>
       </section>
+      <Suspense fallback={<SpinLoader />}>
+        <PostsList />
+      </Suspense>
 
       <footer>
         <p>Copyright 2025</p>
