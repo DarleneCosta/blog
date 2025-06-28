@@ -24,26 +24,16 @@ export default async function Home() {
         <Suspense fallback={<SpinLoader />}>
           <PostsList />
         </Suspense>
-
-        <p className='text-justify'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          quos. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum
-          dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
-          ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          quos. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
-          adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Quisquam, quos.
-        </p>
+        <div>
+          <time dateTime='2025-06-28'>2025-06-28</time>
+          <h1>
+            <Link href='#'>Read more</Link>
+          </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+            quos.
+          </p>
+        </div>
       </section>
 
       <footer>
