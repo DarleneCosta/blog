@@ -12,7 +12,7 @@ export default async function Home() {
       <Header />
 
       <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2'>
-        <Link href='#'>
+        <Link className='w-full h-full overflow-hidden' href='#'>
           <Image
             src='/images/bryen_0.png'
             alt='Post 1'
