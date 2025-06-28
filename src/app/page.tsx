@@ -11,39 +11,40 @@ export default async function Home() {
     <Container>
       <Header />
 
-      <section>
+      <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2'>
         <Link href='#'>
           <Image
             src='/images/bryen_0.png'
             alt='Post 1'
             width={1200}
             height={720}
-            className='w-full h-auto'
+            className='hover:scale-105 transition-all duration-300'
           />
         </Link>
+        <Suspense fallback={<SpinLoader />}>
+          <PostsList />
+        </Suspense>
+
+        <p className='text-justify'>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          quos. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit
+          amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor
+          sit amet consectetur adipisicing elit. Quisquam, quos. Lorem ipsum
+          dolor sit amet consectetur adipisicing elit. Quisquam, quos. Lorem
+          ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
+          quos. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Quisquam, quos. Lorem ipsum dolor sit amet consectetur adipisicing
+          elit. Quisquam, quos. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit amet
+          consectetur adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit
+          amet consectetur adipisicing elit. Quisquam, quos.
+        </p>
       </section>
-
-      <Suspense fallback={<SpinLoader />}>
-        <PostsList />
-      </Suspense>
-
-      <p className='text-justify'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-      </p>
 
       <footer>
         <p>Copyright 2025</p>
