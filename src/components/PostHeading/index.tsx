@@ -13,11 +13,11 @@ export function PostHeading({
   as: Tag = 'h1',
 }: PostHeadingProps) {
   const headingClasses = {
-    h1: 'text-2xl/tight sm:text-4xl/tight',
-    h2: 'text-xl/tight sm:text-3xl/tight',
+    h1: 'text-2xl/tight sm:text-4xl font-extrabold',
+    h2: 'text-2xl/tight font-bold',
   };
 
-  const commonClasses = 'mb-4 font-extrabold';
+  const commonClasses = '';
 
   return (
     <Tag
@@ -26,7 +26,12 @@ export function PostHeading({
         commonClasses,
       )}
     >
-      <Link href={url}>{children}</Link>
+      <Link
+        href={url}
+        className='hover:text-slate-600 transition dark:hover:text-slate-400'
+      >
+        {children}
+      </Link>
     </Tag>
   );
 }
