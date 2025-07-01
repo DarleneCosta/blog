@@ -5,7 +5,7 @@ import { SpinLoader } from '@/components/SpinLoader';
 import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
 import { PostHeading } from '@/components/PostHeading';
-import PostCoverImage from '@/components/PostCoverImage';
+import { PostCoverImage } from '@/components/PostCoverImage';
 
 export const metadata: Metadata = {
   title: 'Home',

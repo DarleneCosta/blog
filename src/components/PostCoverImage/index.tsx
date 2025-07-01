@@ -7,10 +7,7 @@ type PostCoverImageProps = {
   linkProps: React.ComponentProps<typeof Link>;
 };
 
-export default function PostCoverImage({
-  imageProps,
-  linkProps,
-}: PostCoverImageProps) {
+export function PostCoverImage({ imageProps, linkProps }: PostCoverImageProps) {
   return (
     <Link
       className={clsx(
