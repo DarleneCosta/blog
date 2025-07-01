@@ -1,11 +1,16 @@
-import Link from 'next/link';
-import Image from 'next/image';
+import { Suspense } from 'react';
+import { Metadata } from 'next';
 import { PostsList } from '@/components/PostsList';
 import { SpinLoader } from '@/components/SpinLoader';
-import { Suspense } from 'react';
 import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
-import clsx from 'clsx';
+import { PostHeading } from '@/components/PostHeading';
+import PostCoverImage from '@/components/PostCoverImage';
+
+export const metadata: Metadata = {
+  title: 'Home',
+  description: 'Home page',
+};
 
 export default async function Home() {
   return (
@@ -13,20 +18,18 @@ export default async function Home() {
       <Header />
 
       <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
-        <Link className='w-full h-full overflow-hidden rounded-lg' href='#'>
-          <Image
-            src='/images/bryen_0.png'
-            alt='Post 1'
-            width={1200}
-            height={720}
-            priority
-            className={clsx(
-              'w-full h-full object-cover object-center',
-              'group-hover:scale-105 transition-all duration-300',
-              'sm:h-auto sm:w-auto sm:object-contain',
-            )}
-          />
-        </Link>
+        <PostCoverImage
+          imageProps={{
+            src: '/images/bryen_0.png',
+            width: 1200,
+            height: 720,
+            priority: true,
+            alt: 'Post 1',
+          }}
+          linkProps={{
+            href: '#',
+          }}
+        />
 
         <div className='flex flex-col gap-4 sm:justify-center'>
           <time
@@ -35,9 +38,9 @@ export default async function Home() {
           >
             28 Jun 2025 at 10:00
           </time>
-          <h1 className='text-2xl/tight mb-4 font-extrabold sm:text-4xl/tight'>
-            <Link href='#'>Read more</Link>
-          </h1>
+          <PostHeading url='#' as='h1'>
+            Read more
+          </PostHeading>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
             quos.
