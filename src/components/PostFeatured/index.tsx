@@ -1,18 +1,20 @@
+import { postRepository } from '@/repositories/post';
 import { PostCoverImage } from '../PostCoverImage';
 import { PostSummary } from '../PostSummary';
 
 export async function PostFeatured() {
-  const slug = 'bryen-0';
-  const postLink = `/posts/${slug}`;
+  const posts = await postRepository.findAllPublic();
+  const post = posts[0];
+  const postLink = `/posts/${post.slug}`;
   return (
     <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
       <PostCoverImage
         imageProps={{
-          src: '/images/bryen_0.png',
+          src: post.coverImageUrl,
           width: 1200,
           height: 720,
           priority: true,
-          alt: 'Post 1',
+          alt: post.title,
         }}
         linkProps={{
           href: postLink,
@@ -22,9 +24,9 @@ export async function PostFeatured() {
       <PostSummary
         postHeading='h1'
         postLink={postLink}
-        createdAt='2025-06-28T10:00:00'
-        title='Read more'
-        excerpt='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+        createdAt={post.createdAt}
+        title={post.title}
+        excerpt={post.excerpt}
       />
     </section>
   );
