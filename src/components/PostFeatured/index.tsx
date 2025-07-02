@@ -1,6 +1,5 @@
 import { PostCoverImage } from '../PostCoverImage';
-import { PostHeading } from '../PostHeading';
-import { formatDateTime } from '@/utils/format-datetime';
+import { PostSummary } from '../PostSummary';
 
 export async function PostFeatured() {
   const slug = 'bryen-0';
@@ -20,21 +19,13 @@ export async function PostFeatured() {
         }}
       />
 
-      <div className='flex flex-col gap-4 sm:justify-center'>
-        <time
-          className='text-slate-600 block text-sm/tight'
-          dateTime='2025-06-28'
-        >
-          {formatDateTime('2025-06-28T10:00:00')}
-        </time>
-        <PostHeading url={postLink} as='h1'>
-          Read more
-        </PostHeading>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-          quos.
-        </p>
-      </div>
+      <PostSummary
+        postHeading='h1'
+        postLink={postLink}
+        createdAt='2025-06-28T10:00:00'
+        title='Read more'
+        excerpt='Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.'
+      />
     </section>
   );
 }
