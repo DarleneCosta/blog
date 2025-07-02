@@ -1,5 +1,6 @@
 import { PostCoverImage } from '../PostCoverImage';
 import { PostHeading } from '../PostHeading';
+import { formatDateTime } from '@/utils/format-datetime';
 
 export async function PostFeatured() {
   const slug = 'bryen-0';
@@ -24,7 +25,7 @@ export async function PostFeatured() {
           className='text-slate-600 block text-sm/tight'
           dateTime='2025-06-28'
         >
-          28 Jun 2025 at 10:00
+          {formatDateTime('2025-06-28T10:00:00')}
         </time>
         <PostHeading url={postLink} as='h1'>
           Read more
