@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container } from '@/components/Container';
 import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -22,9 +23,7 @@ export default function RootLayout({
         <Container>
           <Header />
           {children}
-          <footer>
-            <p>Copyright 2025</p>
-          </footer>
+          <Footer />
         </Container>
       </body>
     </html>
