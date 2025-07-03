@@ -5,7 +5,7 @@ import { PostSummary } from '../PostSummary';
 export async function PostFeatured() {
   const posts = await findAllPublicPosts();
   const post = posts[0];
-  const postLink = `/posts/${post.slug}`;
+  const postLink = `/post/${post.slug}`;
   return (
     <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
       <PostCoverImage
