@@ -24,7 +24,7 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.readFromDisk();
     const post = posts.find(post => post.id === id);
     if (!post) {
-      throw new Error('Post not found - 404');
+      throw new Error('Post not found for id: ' + id);
     }
     return post;
   }
@@ -33,7 +33,7 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.readFromDisk();
     const post = posts.find(post => post.slug === slug);
     if (!post) {
-      throw new Error('Post not found - 404');
+      throw new Error('Post not found for slug: ' + slug);
     }
     return post;
   }
