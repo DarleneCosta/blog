@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { findPostBySlugCached } from '@/lib/posts/queries';
 import { PostHeading } from '../PostHeading';
 import { PostDate } from '../PostDate';
+import { SafeMarkDown } from '../SafeMarkDown';
 
 type SinglePostProps = {
   slug: string;
@@ -25,7 +26,7 @@ export async function SinglePost({ slug }: SinglePostProps) {
         </p>
       </header>
       <p className='text-xl mb-4'>{post.excerpt}</p>
-      <div>{post.content}</div>
+      <SafeMarkDown content={post.content} />
     </article>
   );
 }
