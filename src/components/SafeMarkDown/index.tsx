@@ -15,10 +15,12 @@ export function SafeMarkDown({ content }: SafeMarkDownProps) {
         'w-full max-w-none',
         'overflow-hidden',
         'prose-a:transition',
-        'prose-a:underline',
+        'prose-a:no-underline',
         'prose-a:text-blue-600 dark:prose-a:text-blue-400',
         'prose-a:hover:text-blue-700 dark:prose-a:hover:text-blue-300',
-        'prose-a:hover:no-underline',
+        'prose-a:hover:underline',
+        'prose-img:mx-auto',
+        'md:prose-lg',
       )}
     >
       <ReactMarkdown
