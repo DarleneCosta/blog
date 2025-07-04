@@ -7,7 +7,7 @@ export default function ErrorMessage({
 }: {
   title: string;
   contentTitle: string;
-  content: string;
+  content: string | React.ReactNode;
 }) {
   return (
     <>
