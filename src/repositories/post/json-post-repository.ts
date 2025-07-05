@@ -5,7 +5,7 @@ import { resolve } from 'path';
 
 const ROOT_DIR = process.cwd();
 const JSON_POSTS_PATH = resolve(ROOT_DIR, 'src', 'db', 'seed', 'posts.json');
-const SIMULATE_DELAY = 3000;
+const SIMULATE_DELAY = 1000;
 
 export class JsonPostRepository implements PostRepository {
   private async readFromDisk(): Promise<PostModel[]> {
