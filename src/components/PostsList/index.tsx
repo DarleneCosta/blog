@@ -1,6 +1,7 @@
 import { findAllPublicPostsCached } from '@/lib/posts/queries';
 import { PostCoverImage } from '../PostCoverImage';
 import { PostSummary } from '../PostSummary';
+import { createImgSrc } from '@/utils/create-img-src';
 
 export const PostsList = async () => {
   const posts = await findAllPublicPostsCached();
@@ -13,7 +14,7 @@ export const PostsList = async () => {
           <div key={post.id} className='flex flex-col gap-4 group'>
             <PostCoverImage
               imageProps={{
-                src: post.coverImageUrl,
+                src: createImgSrc(post.coverImageUrl),
                 alt: post.title,
                 width: 1200,
                 height: 720,

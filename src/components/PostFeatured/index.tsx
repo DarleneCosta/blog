@@ -1,6 +1,7 @@
 import { findAllPublicPostsCached } from '@/lib/posts/queries';
 import { PostCoverImage } from '../PostCoverImage';
 import { PostSummary } from '../PostSummary';
+import { createImgSrc } from '@/utils/create-img-src';
 
 export async function PostFeatured() {
   const posts = await findAllPublicPostsCached();
@@ -10,7 +11,7 @@ export async function PostFeatured() {
     <section className='grid grid-cols-1 gap-8 mb-16 sm:grid-cols-2 group'>
       <PostCoverImage
         imageProps={{
-          src: post.coverImageUrl,
+          src: createImgSrc(post.coverImageUrl),
           width: 1200,
           height: 720,
           priority: true,

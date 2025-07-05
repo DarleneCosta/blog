@@ -3,6 +3,7 @@ import { findPostBySlugCached } from '@/lib/posts/queries';
 import { PostHeading } from '../PostHeading';
 import { PostDate } from '../PostDate';
 import { SafeMarkDown } from '../SafeMarkDown';
+import { createImgSrc } from '@/utils/create-img-src';
 
 type SinglePostProps = {
   slug: string;
@@ -15,7 +16,7 @@ export async function SinglePost({ slug }: SinglePostProps) {
       <header className='group flex flex-col gap-4 mb-4'>
         <Image
           className='rounded-xl'
-          src={post.coverImageUrl}
+          src={createImgSrc(post.coverImageUrl)}
           alt={post.title}
           width={1200}
           height={700}
