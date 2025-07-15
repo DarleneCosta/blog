@@ -15,7 +15,7 @@ export const findAllPublicPostsCached = unstable_cache(
   },
 ); //aqui deixei os dois caches mais somente para teste, mas o ideal é usar o cache do next.js
 
-export const findPostBySlugCached = (slug: string) =>
+export const findPublicPostBySlugCached = (slug: string) =>
   unstable_cache(
     cache(async (slug: string): Promise<PostModel> => {
       const post = await postRepository
