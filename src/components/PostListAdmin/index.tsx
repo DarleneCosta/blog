@@ -1,4 +1,5 @@
 import { findAllPostsAdmin } from '@/lib/posts/queries/admin';
+import DeletePostButton from '@/components/admin/DeletePostButton';
 import clsx from 'clsx';
 import Link from 'next/link';
 
@@ -20,6 +21,7 @@ export default async function PostListAdmin() {
               Não publicado
             </span>
           )}
+          <DeletePostButton id={post.id} title={post.title} />
         </div>
       ))}
     </div>

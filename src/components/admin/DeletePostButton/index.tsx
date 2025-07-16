@@ -7,7 +7,7 @@ type DeletePostButtonProps = {
   title: string;
 };
 
-export default function DeletePostButton({ id, title }: DeletePostButtonProps) {
+export default function DeletePostButton({ title }: DeletePostButtonProps) {
   return (
     <button
       className={clsx(
