@@ -1,0 +1,1 @@
+export const POST_SIMULATE_DELAY_MS = 2000;
