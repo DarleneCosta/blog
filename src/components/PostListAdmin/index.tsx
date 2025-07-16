@@ -1,6 +1,5 @@
 import { findAllPostsAdmin } from '@/lib/posts/queries/admin';
 import clsx from 'clsx';
-import { Trash2Icon } from 'lucide-react';
 import Link from 'next/link';
 
 export default async function PostListAdmin() {
@@ -12,7 +11,6 @@ export default async function PostListAdmin() {
           key={post.id}
           className={clsx(
             'py-2 px-2 flex gap-2 items-center justify-between',
-            'bg-amber-200',
             !post.published && 'bg-slate-300 dark:bg-slate-700',
           )}
         >
@@ -22,19 +20,6 @@ export default async function PostListAdmin() {
               Não publicado
             </span>
           )}
-
-          <button
-            className={clsx(
-              'text-red-500 ',
-              '[&>svg]:w-4 [&>svg]:h-4',
-              'cursor-pointer transition',
-              'hover:scale-120 hover:text-red-700',
-            )}
-            aria-label={`Apagar post: ${post.title}`}
-            title={`Apagar post: ${post.title}`}
-          >
-            <Trash2Icon />
-          </button>
         </div>
       ))}
     </div>

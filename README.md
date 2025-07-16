@@ -61,3 +61,7 @@ for more details.
 ### Exemplo de configuração em pagina estatica
 
 ![Screenshot Mobile](./public/images/static.png)
+
+server action
+
+- utilizar sempre que for mudar algo na base de dados

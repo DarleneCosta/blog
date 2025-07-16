@@ -50,4 +50,10 @@ export class DrizzlePostRepository implements PostRepository {
     }
     return post;
   }
+
+  async deletePostById(id: string): Promise<void> {
+    await asyncDelay(POST_SIMULATE_DELAY_MS, true);
+    logColor('delete', Date.now());
+    await drizzleDb.delete(postsTable).where(eq(postsTable.id, id));
+  }
 }
