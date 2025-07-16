@@ -1,4 +1,5 @@
-import { PostModel } from '@/models/post/post-model';
+'use client';
+
 import { Trash2Icon } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -7,7 +8,11 @@ type DeletePostButtonProps = {
   title: string;
 };
 
-export default function DeletePostButton({ title }: DeletePostButtonProps) {
+export default function DeletePostButton({ id, title }: DeletePostButtonProps) {
+  const handleDelete = async () => {
+    alert(`Apagar post: ${id} ${title}`);
+  };
+
   return (
     <button
       className={clsx(
@@ -18,6 +23,7 @@ export default function DeletePostButton({ title }: DeletePostButtonProps) {
       )}
       aria-label={`Apagar post: ${title}`}
       title={`Apagar post: ${title}`}
+      onClick={handleDelete}
     >
       <Trash2Icon />
     </button>
