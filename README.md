@@ -65,3 +65,6 @@ for more details.
 server action
 
 - utilizar sempre que for mudar algo na base de dados
+
+quebre as sua aplicacao em pequenas componentes para ser especifico o que vai
+ser client e servidor, exemplo interacao com o usuario sempre client.
