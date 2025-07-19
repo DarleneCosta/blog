@@ -9,7 +9,7 @@ export async function PostFeatured() {
     return (
       <ErrorMessage
         contentTitle='Ops 😢'
-        content={<p>Ainda não temos nenhum post! 🤔</p>}
+        content={<p>Ainda não temos nenhum post!</p>}
       />
     );
   }
