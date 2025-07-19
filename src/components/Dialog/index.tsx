@@ -1,12 +1,13 @@
+'use client';
 import clsx from 'clsx';
 
 type DialogProps = {
   isVisible?: boolean;
   title: string;
   content: React.ReactNode;
-  message: string;
   onConfirm: () => void;
   onCancel: () => void;
+  disabled: boolean;
 };
 
 export default function Dialog({
@@ -15,15 +16,21 @@ export default function Dialog({
   content,
   onConfirm,
   onCancel,
+  disabled,
 }: DialogProps) {
   if (!isVisible) return null;
 
+  const handleCancel = () => {
+    if (disabled) return;
+    onCancel();
+  };
   return (
     <div
       className={clsx(
         'fixed inset-0 bg-black/50 z-50 backdrop-blur-xs',
         'flex items-center justify-center',
       )}
+      onClick={handleCancel}
     >
       <div
         className={clsx(
@@ -35,6 +42,7 @@ export default function Dialog({
         aria-modal={true}
         aria-labelledby='dialog-title'
         aria-describedby='dialog-description'
+        onClick={e => e.stopPropagation()}
       >
         <h3 id='dialog-title' className='text-xl font-extrabold'>
           {title}
@@ -47,9 +55,11 @@ export default function Dialog({
               'bg-slate-300 hover:bg-slate-400 transition text-slate-950 ',
               'flex items-center justify-center',
               'px-4 py-2 rounded-lg cursor-pointer',
+              'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-slate-300',
             )}
             onClick={onCancel}
             autoFocus
+            disabled={disabled}
           >
             Cancelar
           </button>
@@ -59,8 +69,10 @@ export default function Dialog({
               'bg-blue-500 hover:bg-blue-600 transition text-blue-50',
               'flex items-center justify-center',
               'px-4 py-2 rounded-lg cursor-pointer',
+              'disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-blue-500',
             )}
             onClick={onConfirm}
+            disabled={disabled}
           >
             Confirmar
           </button>
