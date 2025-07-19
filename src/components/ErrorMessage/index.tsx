@@ -1,17 +1,17 @@
 import clsx from 'clsx';
 
 export default function ErrorMessage({
-  title,
+  title = '',
   contentTitle,
   content,
 }: {
-  title: string;
+  title?: string;
   contentTitle: string;
   content: string | React.ReactNode;
 }) {
   return (
     <>
-      <title>{title}</title>
+      {title && <title>{title}</title>}
       <div
         className={clsx(
           'min-h-[320px]',

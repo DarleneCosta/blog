@@ -68,6 +68,8 @@ Remove-Item db.sqlite3
 rm db.sqlite3
 ```
 
+Se preferir use `npm run db:generate` após removee migrations
+
 #### 2. Recriar as tabelas
 
 Após deletar o banco, execute as migrações novamente:

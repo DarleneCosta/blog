@@ -2,6 +2,7 @@
 
 import { deletePost, findPostByIdAdmin } from '@/lib/posts/queries/admin';
 import { logColor } from '@/utils/log-color';
+import { revalidateTag } from 'next/cache';
 
 export async function deletePostAction(id: string) {
   if (!id || typeof id !== 'string') {
@@ -13,5 +14,9 @@ export async function deletePostAction(id: string) {
   }
   logColor(`deletePostAction ${id}`, Date.now());
   await deletePost(id as string);
+
+  revalidateTag('posts');
+  revalidateTag(`posts-${post.slug}`);
+
   return { error: null };
 }
