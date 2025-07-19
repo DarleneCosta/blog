@@ -21,10 +21,10 @@ export default function DeletePostButton({ id, title }: DeletePostButtonProps) {
   const handleConfirm = () => {
     startTransition(async () => {
       const result = await deletePostAction(id);
-      if (!result.success) {
-        alert(`Erro ao apagar post ${id}`);
-      }
       setIsDialogOpen(false);
+      if (result.error) {
+        alert(`Erro ao apagar post ${id}: ${result.error}`);
+      }
     });
   };
 
