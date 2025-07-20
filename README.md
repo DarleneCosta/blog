@@ -70,6 +70,8 @@ rm db.sqlite3
 
 Se preferir use `npm run db:generate` após removee migrations
 
+ou executar seed
+
 #### 2. Recriar as tabelas
 
 Após deletar o banco, execute as migrações novamente:

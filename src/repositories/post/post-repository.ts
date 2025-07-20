@@ -1,9 +1,15 @@
 import { PostModel } from '@/models/post/post-model';
 
 export interface PostRepository {
-  findAll(): Promise<PostModel[]>;
   findAllPublic(): Promise<PostModel[]>;
   findBySlugPublic(slug: string): Promise<PostModel>;
+  findAll(): Promise<PostModel[]>;
   findById(id: string): Promise<PostModel>;
-  deletePostById(id: string): Promise<void>;
+  //mutations
+  create(post: PostModel): Promise<PostModel>;
+  deleteById(id: string): Promise<PostModel>;
+  updateById(
+    id: string,
+    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt' | 'updatedAt'>,
+  ): Promise<PostModel>;
 }

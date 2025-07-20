@@ -14,7 +14,3 @@ export const findAllPostsAdmin = cache(async () => {
   const posts = await postRepository.findAll();
   return posts;
 });
-
-export const deletePost = async (id: string) => {
-  await postRepository.deletePostById(id);
-};
