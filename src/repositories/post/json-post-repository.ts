@@ -51,7 +51,7 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.id === id);
 
-    if (!post) throw new Error('Post não encontrado para ID');
+    if (!post) throw new Error('Post não encontrado para ID informado.');
 
     return post;
   }
@@ -60,7 +60,7 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.slug === slug);
 
-    if (!post) throw new Error('Post não encontrado para slug');
+    if (!post) throw new Error('Post não encontrado para slug informado.');
 
     return post;
   }

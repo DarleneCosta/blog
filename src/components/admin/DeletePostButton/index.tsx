@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import { deletePostAction } from '@/actions/post/delete-post';
 import { useState, useTransition } from 'react';
 import Dialog from '@/components/Dialog';
+import { toast } from 'react-toastify';
 
 type DeletePostButtonProps = {
   id: string;
@@ -23,8 +24,11 @@ export default function DeletePostButton({ id, title }: DeletePostButtonProps) {
       const result = await deletePostAction(id);
       setIsDialogOpen(false);
       if (result.error) {
-        alert(`Erro ao apagar post ${id}: ${result.error}`);
+        toast.error(`Erro ao apagar post: ${result.error}`);
+        //TODO criar adapter para toastify
+        return;
       }
+      toast.success(`Post apagado com sucesso`);
     });
   };
 

@@ -27,7 +27,7 @@ export class DrizzlePostRepository implements PostRepository {
         and(eq(posts.published, true), eq(posts.slug, slug)),
     });
 
-    if (!post) throw new Error('Post não encontrado para slug');
+    if (!post) throw new Error('Post não encontrado para slug informado.');
 
     return post;
   }
@@ -49,7 +49,7 @@ export class DrizzlePostRepository implements PostRepository {
       where: (posts, { eq }) => eq(posts.id, id),
     });
 
-    if (!post) throw new Error('Post não encontrado para ID');
+    if (!post) throw new Error('Post não encontrado para ID informado.');
 
     return post;
   }
