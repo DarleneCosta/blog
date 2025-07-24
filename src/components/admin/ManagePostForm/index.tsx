@@ -5,6 +5,7 @@ import Button from '@/components/Button';
 import MarkdownEditor from '@/components/MarkdownEditor';
 import InputCheckBox from '@/components/InputCheckBox';
 import InputText from '@/components/InputText';
+import ImageUploader from '../ImageUploader';
 
 export default function ManagePostForm() {
   const [content, setContent] = useState('');
@@ -13,6 +14,7 @@ export default function ManagePostForm() {
       <div className='flex flex-col gap-6 p-4'>
         <InputCheckBox labelText='Título' />
         <InputText labelText='Publicar' />
+        <ImageUploader />
         <MarkdownEditor
           labelText='Conteúdo'
           value={content}
