@@ -14,7 +14,7 @@ db.sqlite3
 !.yarn/versions
 
 # uploads
-/uploads
+/public/uploads
 
 # testing
 /coverage

@@ -1,55 +1,75 @@
 'use server';
 
-import { mkdir, writeFile } from 'fs/promises';
-import { extname, join } from 'path';
 import {
   IMAGE_SERVER_URL,
-  IMAGE_UPLOADER_DIRECTORY,
   IMAGE_UPLOADER_MAX_SIZE,
+  IMAGE_UPLOADER_DIRECTORY,
 } from '@/lib/posts/constants';
+import { asyncDelay } from '@/utils/async-delay';
+import { mkdir, writeFile } from 'fs/promises';
+import { extname, resolve } from 'path';
 
 type UploadImageActionResult = {
-  url?: string;
-  error?: string;
+  url: string;
+  error: string;
 };
 
-const makeResult = ({
+const createResult = ({
+  url = '',
+  error = '',
+}: Partial<UploadImageActionResult>): UploadImageActionResult => ({
   url,
   error,
-}: {
-  url?: string;
-  error?: string;
-}): UploadImageActionResult => ({ url, error });
+});
 
 export async function uploadImage(
   formData: FormData,
 ): Promise<UploadImageActionResult> {
+  // TODO: Verificar se o usuário está logado
+
+  await asyncDelay({ verbose: true });
+
+  if (!(formData instanceof FormData)) {
+    return createResult({ error: 'Dado inválido.' });
+  }
+
   const file = formData.get('file');
-
   if (!(file instanceof File)) {
-    return makeResult({ error: 'Arquivo não encontrado.' });
+    return createResult({ error: 'Arquivo não encontrado.' });
   }
 
-  if (file.size > IMAGE_UPLOADER_MAX_SIZE) {
-    return makeResult({ error: 'Arquivo muito grande.' });
+  const { size, type, name } = file;
+
+  if (size > IMAGE_UPLOADER_MAX_SIZE) {
+    return createResult({
+      error: 'Arquivo excede o tamanho máximo permitido.',
+    });
   }
 
-  if (!file.type.startsWith('image/')) {
-    return makeResult({ error: 'Tipo de imagem inválido.' });
+  if (!type.startsWith('image/')) {
+    return createResult({
+      error: 'O arquivo enviado não é uma imagem válida.',
+    });
   }
 
-  const fileExt = extname(file.name);
-  const fileName = `${Date.now()}${fileExt}`;
-  const uploadDir = join(process.cwd(), IMAGE_UPLOADER_DIRECTORY);
+  const extension = extname(name);
+  const filename = `${Date.now()}${extension}`;
+  const fullUploadPath = resolve(
+    process.cwd(),
+    'public',
+    IMAGE_UPLOADER_DIRECTORY,
+  );
+  const fullFilePath = resolve(fullUploadPath, filename);
 
-  // Garante que o diretório de upload existe
-  await mkdir(uploadDir, { recursive: true });
+  try {
+    await mkdir(fullUploadPath, { recursive: true });
+    const buffer = Buffer.from(await file.arrayBuffer());
+    await writeFile(fullFilePath, buffer);
 
-  const filePath = join(uploadDir, fileName);
-  const fileBuffer = Buffer.from(await file.arrayBuffer());
-
-  await writeFile(filePath, fileBuffer);
-
-  const url = `${IMAGE_SERVER_URL}/${fileName}`;
-  return makeResult({ url });
+    const url = `${IMAGE_SERVER_URL}/${filename}`;
+    return createResult({ url });
+  } catch (err) {
+    console.error('Erro ao salvar imagem:', err);
+    return createResult({ error: 'Falha ao salvar a imagem no servidor.' });
+  }
 }
