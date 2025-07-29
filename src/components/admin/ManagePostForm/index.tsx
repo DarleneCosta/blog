@@ -1,6 +1,6 @@
 'use client';
 
-import { useActionState, useState } from 'react';
+import { useActionState, useEffect, useState } from 'react';
 import Button from '@/components/Button';
 import MarkdownEditor from '@/components/MarkdownEditor';
 import InputCheckBox from '@/components/InputCheckBox';
@@ -8,6 +8,7 @@ import InputText from '@/components/InputText';
 import ImageUploader from '../ImageUploader';
 import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
 import { createPostAction } from '@/actions/post/create-post';
+import { toast } from 'react-toastify';
 
 type ManagePostFormProps = {
   publicPost?: PublicPost;
@@ -24,6 +25,13 @@ export default function ManagePostForm({ publicPost }: ManagePostFormProps) {
   );
   const { formState } = state;
   const [content, setContent] = useState(formState.content);
+
+  useEffect(() => {
+    if (state.errors.length > 0) {
+      toast.dismiss();
+      toast.error(state.errors.join(', '));
+    }
+  }, [state.errors]);
 
   return (
     <form className='flex flex-col gap-6' action={formAction}>

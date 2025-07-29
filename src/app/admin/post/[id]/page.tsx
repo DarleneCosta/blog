@@ -2,7 +2,7 @@ import ManagePostForm from '@/components/admin/ManagePostForm';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { findPostByIdAdmin } from '@/lib/posts/queries/admin';
-import { makePublicPost } from '@/dto/post/dto';
+import { makePartialPublicPost } from '@/dto/post/dto';
 
 export const dynamic = 'force-dynamic';
 
@@ -20,7 +20,7 @@ export default async function PostIdPage({ params }: AdminPostIdPageProps) {
   if (!post) {
     notFound();
   }
-  const publicPost = makePublicPost(post);
+  const publicPost = makePartialPublicPost(post);
   return (
     <div className='flex flex-col gap-4 p-4'>
       <h1 className='text-xl font-bold'>Editar post</h1>
