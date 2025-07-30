@@ -3,6 +3,8 @@
 import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
 import { PostCreateSchema } from '@/lib/posts/validation';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
+import { makeSlug } from '@/utils/make-slug';
+import { v4 as uuidv4 } from 'uuid';
 
 type CreatePostActionState = {
   formState: PublicPost;
@@ -36,8 +38,8 @@ export async function createPostAction(
     ...validatedData,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    id: '',
-    slug: '',
+    id: uuidv4(),
+    slug: makeSlug(validatedData.title),
   };
   return {
     formState: newPost,
