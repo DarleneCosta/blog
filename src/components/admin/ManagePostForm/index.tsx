@@ -94,7 +94,9 @@ export default function ManagePostForm({ publicPost }: ManagePostFormProps) {
           defaultChecked={formState.published}
         />
         <div className='mt-4'>
-          <Button type='submit'>Criar Post</Button>
+          <Button type='submit' disabled={isPending}>
+            {isPending ? 'Salvando...' : 'Salvar'}
+          </Button>
         </div>
       </div>
     </form>
