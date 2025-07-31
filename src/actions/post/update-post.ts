@@ -1,24 +1,20 @@
 'use server';
 
 import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
-import { PostCreateSchema } from '@/lib/posts/validation';
+import { PostUpdateSchema } from '@/lib/posts/validation';
 import { postRepository } from '@/repositories/post';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
-import { makeSlug } from '@/utils/make-slug';
-import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { v4 as uuidv4 } from 'uuid';
 
-type CreatePostActionState = {
+type UpdatePostActionState = {
   formState: PublicPost;
   errors: string[];
 };
 
-export async function createPostAction(
-  prevState: CreatePostActionState,
+export async function updatePostAction(
+  prevState: UpdatePostActionState,
   formData: FormData,
-): Promise<CreatePostActionState> {
-  // TODO: VALIDAR SE O USUARIO ESTA LOGADO
+): Promise<UpdatePostActionState> {
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,
@@ -27,7 +23,7 @@ export async function createPostAction(
   }
 
   const formDataToObject = Object.fromEntries(formData.entries());
-  const zodParsed = PostCreateSchema.safeParse(formDataToObject);
+  const zodParsed = PostUpdateSchema.safeParse(formDataToObject);
 
   if (!zodParsed.success) {
     return {
@@ -39,14 +35,11 @@ export async function createPostAction(
   const validatedData = zodParsed.data;
   const newPost = {
     ...validatedData,
-    createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    id: uuidv4(),
-    slug: makeSlug(validatedData.title),
   };
 
   try {
-    await postRepository.create(newPost);
+    await postRepository.updateById(prevState.formState.id, newPost);
   } catch (error: unknown) {
     if (error instanceof Error) {
       return {
@@ -60,6 +53,5 @@ export async function createPostAction(
     };
   }
 
-  revalidateTag('posts');
-  return redirect(`/admin/post/${newPost.id}`);
+  return redirect(`/admin/post`);
 }

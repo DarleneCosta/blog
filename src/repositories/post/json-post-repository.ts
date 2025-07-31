@@ -103,7 +103,7 @@ export class JsonPostRepository implements PostRepository {
 
   async updateById(
     id: string,
-    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt' | 'updatedAt'>,
+    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt'>,
   ): Promise<PostModel> {
     const posts = await this.findAll();
     const postIndex = posts.findIndex(p => p.id === id);

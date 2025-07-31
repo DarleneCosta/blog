@@ -1,6 +1,6 @@
 import { isUrlOrRelativePath } from '@/utils/is-url-or-relative-path';
 import sanitizeHtml from 'sanitize-html';
-import { z } from 'zod';
+import { uuidv4, z } from 'zod';
 
 const PostBaseSchema = z.object({
   title: z
@@ -45,5 +45,6 @@ export const PostCreateSchema = PostBaseSchema;
 
 // PostUpdateSchema: pode incluir campos extras no futuro (ex: id)
 export const PostUpdateSchema = PostBaseSchema.extend({
-  // id: z.string().uuid('ID inválido'),
+  id: z.string().uuid().refine(uuidv4, 'ID inválido'),
+  slug: z.string().min(3, 'Slug precisa de um mínimo de 3 caracteres'),
 });

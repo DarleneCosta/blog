@@ -1,18 +1,26 @@
 'use server';
 
 import { postRepository } from '@/repositories/post';
-import { logColor } from '@/utils/log-color';
 import { revalidateTag } from 'next/cache';
 
 export async function deletePostAction(id: string) {
   try {
     if (!id || typeof id !== 'string') {
-      return { error: 'Post ID is required' };
+      return { error: 'Dados inválidos' };
     }
     const post = await postRepository.findById(id);
-
-    logColor(`deletePostAction ${id}`, Date.now());
-    await postRepository.deleteById(id);
+    try {
+      await postRepository.deleteById(id);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        return {
+          error: error.message,
+        };
+      }
+      return {
+        error: 'Erro ao deletar post',
+      };
+    }
 
     revalidateTag('posts');
     revalidateTag(`posts-${post.slug}`);
