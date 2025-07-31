@@ -21,10 +21,11 @@ export default async function PostIdPage({ params }: AdminPostIdPageProps) {
     notFound();
   }
   const publicPost = makePartialPublicPost(post);
+
   return (
     <div className='flex flex-col gap-4 p-4'>
       <h1 className='text-xl font-bold'>Editar post</h1>
-      <ManagePostForm publicPost={publicPost} />
+      <ManagePostForm publicPost={publicPost} mode='update' />
     </div>
   );
 }

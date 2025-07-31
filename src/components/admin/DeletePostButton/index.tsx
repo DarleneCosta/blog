@@ -2,7 +2,7 @@
 
 import { Trash2Icon } from 'lucide-react';
 import clsx from 'clsx';
-import { deletePostAction } from '@/actions/post/delete-post';
+import { deletePostAction } from '@/actions/post/delete-post-action';
 import { useState, useTransition } from 'react';
 import Dialog from '@/components/Dialog';
 import { toast } from 'react-toastify';
