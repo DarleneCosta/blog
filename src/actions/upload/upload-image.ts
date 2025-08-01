@@ -1,13 +1,15 @@
 'use server';
 
-import {
-  IMAGE_SERVER_URL,
-  IMAGE_UPLOADER_MAX_SIZE,
-  IMAGE_UPLOADER_DIRECTORY,
-} from '@/lib/constants';
 import { asyncDelay } from '@/utils/async-delay';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
+
+const imageUploaderMaxSize =
+  Number(process.env.NEXT_PUBLIC_IMAGE_UPLOADER_MAX_SIZE) || 900 * 1024;
+const imageUploaderDirectory =
+  process.env.NEXT_PUBLIC_IMAGE_UPLOADER_DIRECTORY || 'uploads';
+const imageServerUrl =
+  process.env.NEXT_PUBLIC_IMAGE_SERVER_URL || 'http://localhost:3000/uploads';
 
 type UploadImageActionResult = {
   url: string;
@@ -40,9 +42,11 @@ export async function uploadImage(
 
   const { size, type, name } = file;
 
-  if (size > IMAGE_UPLOADER_MAX_SIZE) {
+  if (size > imageUploaderMaxSize) {
     return createResult({
-      error: 'Arquivo excede o tamanho máximo permitido.',
+      error: `Arquivo excede o tamanho máximo permitido. ${(
+        imageUploaderMaxSize / 1024
+      ).toFixed(0)}kb.`,
     });
   }
 
@@ -57,7 +61,7 @@ export async function uploadImage(
   const fullUploadPath = resolve(
     process.cwd(),
     'public',
-    IMAGE_UPLOADER_DIRECTORY,
+    imageUploaderDirectory,
   );
   const fullFilePath = resolve(fullUploadPath, filename);
 
@@ -66,7 +70,7 @@ export async function uploadImage(
     const buffer = Buffer.from(await file.arrayBuffer());
     await writeFile(fullFilePath, buffer);
 
-    const url = `${IMAGE_SERVER_URL}/${filename}`;
+    const url = `${imageServerUrl}/${filename}`;
     return createResult({ url });
   } catch (err) {
     console.error('Erro ao salvar imagem:', err);

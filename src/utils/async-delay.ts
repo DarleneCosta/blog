@@ -1,7 +1,8 @@
-import { SIMULATE_WAIT_IN_MS } from '@/lib/constants';
 import { logColor } from './log-color';
 
-export async function asyncDelay(ms = SIMULATE_WAIT_IN_MS, verbose = false) {
+const simulateWaitInMs = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
+
+export async function asyncDelay(ms = simulateWaitInMs, verbose = false) {
   if (ms <= 0) {
     return;
   }

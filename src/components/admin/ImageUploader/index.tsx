@@ -3,9 +3,11 @@
 import { useRef, useState, useTransition } from 'react';
 import Button from '@/components/Button';
 import { ImageUpIcon } from 'lucide-react';
-import { IMAGE_UPLOADER_MAX_SIZE } from '@/lib/constants';
 import { toast } from 'react-toastify';
 import { uploadImage } from '@/actions/upload/upload-image';
+
+const imageUploaderMaxSize =
+  Number(process.env.NEXT_PUBLIC_IMAGE_UPLOADER_MAX_SIZE) || 900 * 1024;
 
 type ImageUploaderProps = {
   disabled?: boolean;
@@ -32,9 +34,9 @@ export default function ImageUploader({ disabled }: ImageUploaderProps) {
       setImageUrl(null);
       return;
     }
-    if (file.size > IMAGE_UPLOADER_MAX_SIZE) {
+    if (file.size > imageUploaderMaxSize) {
       toast.error(
-        `A imagem deve ter menos de ${IMAGE_UPLOADER_MAX_SIZE / 1024}KB`,
+        `A imagem deve ter menos de ${imageUploaderMaxSize / 1024}KB`,
       );
       setImageUrl(null);
       fileInputRef.current.value = '';
