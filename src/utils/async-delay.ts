@@ -1,13 +1,7 @@
-import { POST_SIMULATE_DELAY_MS } from '@/lib/posts/constants';
+import { SIMULATE_WAIT_IN_MS } from '@/lib/constants';
 import { logColor } from './log-color';
 
-export async function asyncDelay({
-  ms = POST_SIMULATE_DELAY_MS,
-  verbose = false,
-}: {
-  ms?: number;
-  verbose?: boolean;
-}) {
+export async function asyncDelay(ms = SIMULATE_WAIT_IN_MS, verbose = false) {
   if (ms <= 0) {
     return;
   }

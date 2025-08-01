@@ -2,8 +2,7 @@ import { PostModel } from '@/models/post/post-model';
 import { PostRepository } from './post-repository';
 import { resolve } from 'path';
 import { readFile, writeFile } from 'fs/promises';
-
-const simulateWaitMs = Number(process.env.SIMULATE_WAIT_IN_MS) || 0;
+import { SIMULATE_WAIT_IN_MS } from '@/lib/constants';
 
 const ROOT_DIR = process.cwd();
 const JSON_POSTS_FILE_PATH = resolve(
@@ -16,9 +15,9 @@ const JSON_POSTS_FILE_PATH = resolve(
 
 export class JsonPostRepository implements PostRepository {
   private async simulateWait() {
-    if (simulateWaitMs <= 0) return;
+    if (SIMULATE_WAIT_IN_MS <= 0) return;
 
-    await new Promise(resolve => setTimeout(resolve, simulateWaitMs));
+    await new Promise(resolve => setTimeout(resolve, SIMULATE_WAIT_IN_MS));
   }
 
   private async readFromDisk(): Promise<PostModel[]> {
@@ -51,7 +50,7 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.id === id);
 
-    if (!post) throw new Error('Post não encontrado para ID informado.');
+    if (!post) throw new Error('Post não encontrado para ID');
 
     return post;
   }
@@ -60,7 +59,7 @@ export class JsonPostRepository implements PostRepository {
     const posts = await this.findAllPublic();
     const post = posts.find(post => post.slug === slug);
 
-    if (!post) throw new Error('Post não encontrado para slug informado.');
+    if (!post) throw new Error('Post não encontrado para slug');
 
     return post;
   }
@@ -103,7 +102,7 @@ export class JsonPostRepository implements PostRepository {
 
   async updateById(
     id: string,
-    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt'>,
+    newPostData: Omit<PostModel, 'id' | 'slug' | 'createdAt' | 'updatedAt'>,
   ): Promise<PostModel> {
     const posts = await this.findAll();
     const postIndex = posts.findIndex(p => p.id === id);

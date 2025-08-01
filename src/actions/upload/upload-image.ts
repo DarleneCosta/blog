@@ -4,7 +4,7 @@ import {
   IMAGE_SERVER_URL,
   IMAGE_UPLOADER_MAX_SIZE,
   IMAGE_UPLOADER_DIRECTORY,
-} from '@/lib/posts/constants';
+} from '@/lib/constants';
 import { asyncDelay } from '@/utils/async-delay';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
@@ -27,7 +27,7 @@ export async function uploadImage(
 ): Promise<UploadImageActionResult> {
   // TODO: Verificar se o usuário está logado
 
-  await asyncDelay({ verbose: true });
+  await asyncDelay();
 
   if (!(formData instanceof FormData)) {
     return createResult({ error: 'Dado inválido.' });
