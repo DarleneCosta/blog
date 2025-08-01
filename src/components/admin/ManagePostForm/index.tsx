@@ -10,7 +10,7 @@ import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
 import { createPostAction } from '@/actions/post/create-post-action';
 import { updatePostAction } from '@/actions/post/update-post-action';
 import { toast } from 'react-toastify';
-import { SelectCardOption } from '@/components/SelectCardOption';
+import { useSearchParams, useRouter } from 'next/navigation';
 
 type ManagePostFormUpdateProps = {
   mode: 'update';
@@ -27,6 +27,9 @@ type ManagePostFormProps =
 
 export default function ManagePostForm(props: ManagePostFormProps) {
   const { mode } = props;
+
+  const searchParams = useSearchParams();
+  const created = searchParams.get('created');
 
   let publicPost;
   if (mode === 'update') {
@@ -48,6 +51,7 @@ export default function ManagePostForm(props: ManagePostFormProps) {
   );
   const { formState } = state;
   const [content, setContent] = useState(formState.content);
+  const router = useRouter();
 
   useEffect(() => {
     if (state?.errors && state.errors.length > 0) {
@@ -63,10 +67,19 @@ export default function ManagePostForm(props: ManagePostFormProps) {
     }
   }, [state?.success]);
 
+  useEffect(() => {
+    if (created === '1') {
+      const url = new URL(window.location.href);
+      url.searchParams.delete('created');
+      router.replace(url.toString());
+      toast.dismiss();
+      toast.success('Post criado com sucesso!');
+    }
+  }, [created, router]);
+
   return (
     <form className='flex flex-col gap-6' action={formAction}>
       <div className='flex flex-col gap-6'>
-        <SelectCardOption />
         <InputText
           labelText='ID'
           placeholder='ID gerado automaticamente'
@@ -116,7 +129,7 @@ export default function ManagePostForm(props: ManagePostFormProps) {
           textAreaName='content'
           disabled={isPending}
         />
-        <ImageUploader />
+        <ImageUploader disabled={isPending} />
         <InputText
           labelText='Url da imagem de capa'
           name='coverImageUrl'

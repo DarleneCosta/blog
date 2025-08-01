@@ -1,3 +1,3 @@
-export function makeRandomString() {
-  return Math.random().toString(36).substring(2, 6);
+export function makeRandomString(length: number = 6) {
+  return Math.random().toString(36).substring(2, length);
 }

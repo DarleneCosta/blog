@@ -5,12 +5,13 @@ import { PostUpdateSchema } from '@/lib/posts/validation';
 import { PostModel } from '@/models/post/post-model';
 import { postRepository } from '@/repositories/post';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
+import { makeRandomString } from '@/utils/make-random-string';
 import { revalidateTag } from 'next/cache';
 
 type UpdatePostActionState = {
   formState: PublicPost;
   errors?: string[] | [];
-  success?: true;
+  success?: string;
 };
 
 export async function updatePostAction(
@@ -62,6 +63,6 @@ export async function updatePostAction(
   revalidateTag(`posts-${post.slug}`);
   return {
     formState: makePartialPublicPost(formDataToObject),
-    success: true,
+    success: makeRandomString(),
   };
 }
