@@ -24,10 +24,10 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
 
   //aqui eu checaria se o usuario existe no banco de dados
   //porem nao vou fazer isso aqui, vou usar um mock por env
-  const isUsernameValid = username === process.env.ADMIN_USERNAME;
+  const isUsernameValid = username === process.env.LOGIN_USER;
   const isPasswordValid = await verifyPassword(
     password,
-    process.env.ADMIN_PASSWORD as string,
+    process.env.LOGIN_PASS as string,
   );
 
   if (!isUsernameValid || !isPasswordValid) {
@@ -36,6 +36,8 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
       error: 'Usuário ou senha inválidos',
     };
   }
+
+  //dados validos criar cookie e redirecionar para a pagina de admin
 
   return { username, error: '' };
 }

@@ -7,6 +7,9 @@ export async function hashPassword(password: string) {
 }
 
 export async function verifyPassword(password: string, base64Hash: string) {
+  if (!base64Hash || !password) {
+    return false;
+  }
   const decodedHash = Buffer.from(base64Hash, 'base64').toString('utf-8');
   const isValid = await bcrypt.compare(password, decodedHash);
   return isValid;
