@@ -1,6 +1,6 @@
 'use client';
 import clsx from 'clsx';
-import Button from '../Button';
+import { Button } from '../Button';
 
 type DialogProps = {
   isVisible?: boolean;

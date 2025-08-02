@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState, useTransition } from 'react';
-import Button from '@/components/Button';
+import { Button } from '@/components/Button';
 import { ImageUpIcon } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { uploadImage } from '@/actions/upload/upload-image';

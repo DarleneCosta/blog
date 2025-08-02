@@ -5,7 +5,7 @@ type InputTextProps = {
   labelText?: string;
 } & React.ComponentProps<'input'>;
 
-export default function InputText({ labelText, ...props }: InputTextProps) {
+export function InputText({ labelText, ...props }: InputTextProps) {
   const inputId = useId();
   return (
     <div className='flex flex-col gap-2'>

@@ -10,7 +10,7 @@ type ButtonProps = {
   size?: ButtonSize;
 } & React.ComponentProps<'button'>;
 
-export default function Button({
+export function Button({
   children,
   variant = 'default',
   size = 'md',
