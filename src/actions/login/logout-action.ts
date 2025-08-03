@@ -1,17 +1,11 @@
 'use server';
 
+import { deleteLoginSession } from '@/lib/login/manage-login';
 import { asyncDelay } from '@/utils/async-delay';
+import { redirect } from 'next/navigation';
 
-type LoginActionState = {
-  username: string;
-  error: string;
-};
-
-export async function loginAction(state: LoginActionState, formData: FormData) {
-  await asyncDelay(5000); // Vou manter
-
-  return {
-    username: '',
-    error: 'Teste de erro',
-  };
+export async function logoutAction() {
+  await asyncDelay(); // Vou manter
+  await deleteLoginSession();
+  redirect('/admin/login');
 }

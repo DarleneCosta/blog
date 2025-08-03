@@ -1,7 +1,7 @@
 import { findAllPublicPostsCached } from '@/lib/posts/queries/public';
 import { PostCoverImage } from '../PostCoverImage';
 import { PostSummary } from '../PostSummary';
-import ErrorMessage from '../ErrorMessage';
+import { ErrorMessage } from '../ErrorMessage';
 
 export async function PostFeatured() {
   const posts = await findAllPublicPostsCached();

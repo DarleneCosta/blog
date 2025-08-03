@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-export default function ErrorMessage({
+export const ErrorMessage = ({
   title = '',
   contentTitle,
   content,
@@ -8,7 +8,7 @@ export default function ErrorMessage({
   title?: string;
   contentTitle: string;
   content: string | React.ReactNode;
-}) {
+}) => {
   return (
     <>
       {title && <title>{title}</title>}
@@ -29,4 +29,4 @@ export default function ErrorMessage({
       </div>
     </>
   );
-}
+};
