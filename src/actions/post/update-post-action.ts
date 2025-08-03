@@ -1,6 +1,7 @@
 'use server';
 
 import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
+import { verifyLoginSession } from '@/lib/login/manage-login';
 import { PostUpdateSchema } from '@/lib/posts/validation';
 import { PostModel } from '@/models/post/post-model';
 import { postRepository } from '@/repositories/post';
@@ -18,6 +19,8 @@ export async function updatePostAction(
   prevState: UpdatePostActionState,
   formData: FormData,
 ): Promise<UpdatePostActionState> {
+  const isAuthenticated = await verifyLoginSession();
+
   if (!(formData instanceof FormData)) {
     return {
       formState: prevState.formState,
@@ -35,6 +38,13 @@ export async function updatePostAction(
 
   const formDataToObject = Object.fromEntries(formData.entries());
   const zodParsed = PostUpdateSchema.safeParse(formDataToObject);
+
+  if (!isAuthenticated) {
+    return {
+      formState: makePartialPublicPost(formDataToObject),
+      errors: ['Faça login em outra aba antes de salvar o post'],
+    };
+  }
 
   if (!zodParsed.success) {
     return {

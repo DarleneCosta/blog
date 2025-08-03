@@ -1,5 +1,6 @@
 'use server';
 
+import { verifyLoginSession } from '@/lib/login/manage-login';
 import { asyncDelay } from '@/utils/async-delay';
 import { mkdir, writeFile } from 'fs/promises';
 import { extname, resolve } from 'path';
@@ -27,7 +28,12 @@ const createResult = ({
 export async function uploadImage(
   formData: FormData,
 ): Promise<UploadImageActionResult> {
-  // TODO: Verificar se o usuário está logado
+  const isAuthenticated = await verifyLoginSession();
+  if (!isAuthenticated) {
+    return createResult({
+      error: 'Faça login em outra aba antes de salvar a imagem',
+    });
+  }
 
   await asyncDelay();
 

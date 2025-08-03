@@ -5,7 +5,7 @@ type InputCheckBoxProps = {
   labelText?: string;
 } & React.ComponentProps<'input'>;
 
-const InputCheckBox = ({ labelText, ...props }: InputCheckBoxProps) => {
+export const InputCheckBox = ({ labelText, ...props }: InputCheckBoxProps) => {
   const inputId = useId();
   return (
     <div className='flex items-center gap-3'>
@@ -29,5 +29,3 @@ const InputCheckBox = ({ labelText, ...props }: InputCheckBoxProps) => {
     </div>
   );
 };
-
-export default InputCheckBox;

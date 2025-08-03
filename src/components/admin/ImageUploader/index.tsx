@@ -13,7 +13,7 @@ type ImageUploaderProps = {
   disabled?: boolean;
 };
 
-export default function ImageUploader({ disabled }: ImageUploaderProps) {
+export const ImageUploader = ({ disabled }: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isUploading, startTransition] = useTransition();
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -97,4 +97,4 @@ export default function ImageUploader({ disabled }: ImageUploaderProps) {
       />
     </div>
   );
-}
+};

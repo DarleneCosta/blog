@@ -1,11 +1,11 @@
 'use client';
 
 import { useActionState, useEffect, useState } from 'react';
-import Button from '@/components/Button';
-import MarkdownEditor from '@/components/MarkdownEditor';
-import InputCheckBox from '@/components/InputCheckBox';
-import InputText from '@/components/InputText';
-import ImageUploader from '../ImageUploader';
+import { Button } from '@/components/Button';
+import { MarkdownEditor } from '@/components/admin/MarkdownEditor';
+import { InputCheckBox } from '@/components/admin/InputCheckBox';
+import { InputText } from '@/components/admin/InputText';
+import { ImageUploader } from '@/components/admin/ImageUploader';
 import { makePartialPublicPost, PublicPost } from '@/dto/post/dto';
 import { createPostAction } from '@/actions/post/create-post-action';
 import { updatePostAction } from '@/actions/post/update-post-action';

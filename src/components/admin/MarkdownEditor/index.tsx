@@ -11,13 +11,13 @@ type MarkdownEditorProps = {
   disabled?: boolean;
 };
 
-export default function MarkdownEditor({
+export const MarkdownEditor = ({
   labelText = '',
   value,
   setValue,
   textAreaName,
   disabled = false,
-}: MarkdownEditorProps) {
+}: MarkdownEditorProps) => {
   const id = useId();
   return (
     <div className='flex flex-col gap-2'>
@@ -45,4 +45,4 @@ export default function MarkdownEditor({
       />
     </div>
   );
-}
+};

@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import { SignJWT, jwtVerify } from 'jose';
+import { redirect } from 'next/navigation';
 
 const jwtSecret = process.env.JWT_SECRET_KEY;
 const jwtEncodedKey = new TextEncoder().encode(jwtSecret);
@@ -52,10 +53,43 @@ export async function deleteLoginSession() {
   cookieStore.set(loginCookieName, '', { expires: new Date(0) });
   cookieStore.delete(loginCookieName);
 }
+
+export async function getLoginSession() {
+  const cookieStore = await cookies();
+  const loginSession = cookieStore.get(loginCookieName)?.value;
+  return loginSession ? verifyJwt(loginSession) : false;
+}
+
+export async function verifyLoginSession() {
+  const loginSession = await getLoginSession();
+  if (!loginSession) {
+    return false;
+  }
+  return loginSession.username === process.env.LOGIN_USER; //so funcionria aqui pq so temos um usuario
+}
+
+export async function requireLoginSessionOrRedirect() {
+  const isAuthenticated = await verifyLoginSession();
+  if (!isAuthenticated) {
+    redirect('/admin/login');
+  }
+}
+
 export async function signJwt(jwtPayload: JwtPayload) {
   return await new SignJWT(jwtPayload)
     .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
     .setIssuedAt()
     .setExpirationTime(loginExpStr)
     .sign(jwtEncodedKey);
+}
+
+export async function verifyJwt(jwt: string) {
+  try {
+    const { payload } = await jwtVerify(jwt, jwtEncodedKey, {
+      algorithms: ['HS256'],
+    });
+    return payload as JwtPayload;
+  } catch {
+    return false;
+  }
 }
