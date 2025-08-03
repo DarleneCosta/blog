@@ -6,12 +6,11 @@ import {
   FileTextIcon,
   HourglassIcon,
   HouseIcon,
-  Loader2Icon,
   LogOutIcon,
   MenuIcon,
   PlusIcon,
 } from 'lucide-react';
-import { startTransition, useEffect, useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { logoutAction } from '@/actions/login/logout-action';
