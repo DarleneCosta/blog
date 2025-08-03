@@ -6,7 +6,6 @@
   "terminal.integrated.fontSize": 16,
   "editor.glyphMargin": false,
   "workbench.activityBar.location": "hidden",
-  "editor.lineNumbers": "off",
   "files.eol": "\n",
   "workbench.editor.labelFormat": "short",
   "files.autoSave": "onFocusChange",
