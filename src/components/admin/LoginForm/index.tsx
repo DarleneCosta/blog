@@ -2,7 +2,7 @@
 
 import { loginAction } from '@/actions/login/login-action';
 import { Button } from '@/components/Button';
-import { InputText } from '@/components/admin/InputText';
+import { InputText } from '@/components/InputText';
 import clsx from 'clsx';
 import { LogInIcon } from 'lucide-react';
 import { useActionState, useEffect } from 'react';
