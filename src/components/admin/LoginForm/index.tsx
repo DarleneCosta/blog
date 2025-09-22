@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { loginAction } from '@/actions/login/login-action';
 import { Button } from '@/components/Button';
 import { InputText } from '@/components/InputText';
@@ -10,15 +11,15 @@ import { toast } from 'react-toastify';
 
 export function LoginForm() {
   const initialState = {
-    username: '',
-    error: '',
+    email: '',
+    errors: [],
   };
   const [state, action, isPending] = useActionState(loginAction, initialState);
 
   useEffect(() => {
-    if (state.error) {
+    if (state.errors.length > 0) {
       toast.dismiss();
-      toast.error(state.error);
+      state.errors.forEach(error => toast.error(error));
     }
   }, [state]);
 
@@ -31,28 +32,30 @@ export function LoginForm() {
     >
       <form action={action} className='flex-1 flex flex-col gap-6'>
         <InputText
-          type='text'
-          name='username'
-          labelText='Usuário'
-          placeholder='Seu usuário'
+          type='email'
+          name='email'
+          labelText='E-mail'
+          placeholder='Seu e-mail'
           disabled={isPending}
-          defaultValue={state.username}
+          defaultValue={state.email}
+          required
         />
-
         <InputText
           type='password'
           name='password'
           labelText='Senha'
           placeholder='Sua senha'
           disabled={isPending}
+          required
         />
-
         <Button disabled={isPending} type='submit' className='mt-4'>
           <LogInIcon />
-          Entrar
+          {!isPending && 'Entrar'}
+          {isPending && 'Entrando...'}
         </Button>
-
-        {!!state.error && <p className='text-red-600'>{state.error}</p>}
+        <p className='text-sm/tight'>
+          <Link href='/user/new'>Criar conta</Link>
+        </p>
       </form>
     </div>
   );

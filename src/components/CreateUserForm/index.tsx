@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import { UserRoundIcon } from 'lucide-react';
 import { Button } from '../Button';
