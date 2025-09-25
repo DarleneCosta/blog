@@ -1,6 +1,6 @@
 'use server';
 
-import { createLoginSession } from '@/lib/login/manage-login';
+import { createLoginSessionFromApi } from '@/lib/login/manage-login';
 import { LoginSchema } from '@/lib/login/schemas';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
 import { apiRequest } from '@/utils/api-request';
@@ -53,6 +53,6 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
     };
   }
 
-  await createLoginSession(response.data.accessToken);
+  await createLoginSessionFromApi(response.data.accessToken);
   redirect('/admin/post');
 }

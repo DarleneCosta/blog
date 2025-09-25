@@ -30,10 +30,10 @@ export async function verifyPassword(password: string, base64Hash: string) {
   return isValid;
 }
 
-export async function createLoginSession(username: string) {
+export async function createLoginSessionFromApi(jwt: string) {
   const expiredAt = new Date(Date.now() + loginExpSeconds * 1000);
 
-  const loginSession = await signJwt({ username, expiredAt });
+  const loginSession = jwt;
 
   const cookieStore = await cookies();
 
@@ -42,10 +42,21 @@ export async function createLoginSession(username: string) {
     expires: expiredAt,
     secure: true, //somente o servidor pode acessar o cookie
     sameSite: 'strict', //somente o servidor pode acessar o cookie
-    path: '/',
   });
+}
 
-  return { loginSession, expiredAt };
+export async function getLoginSessionForApi() {
+  const cookieStore = await cookies();
+  const jwt = cookieStore.get(loginCookieName)?.value;
+  return !jwt ? false : jwt;
+}
+
+export async function requireLoginSessionForApiOrRedirect() {
+  const isAuthenticated = await getLoginSessionForApi();
+  console.log(isAuthenticated, 'isAuthenticated')
+  if (!isAuthenticated) {
+    redirect('/login');
+  }
 }
 
 export async function deleteLoginSession() {
@@ -71,7 +82,7 @@ export async function verifyLoginSession() {
 export async function requireLoginSessionOrRedirect() {
   const isAuthenticated = await verifyLoginSession();
   if (!isAuthenticated) {
-    redirect('/admin/login');
+    redirect('/login');
   }
 }
 
