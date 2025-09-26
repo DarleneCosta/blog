@@ -10,7 +10,7 @@ type ApiRequestSuccess<T> = {
   status: number;
 };
 
-type ApiRequest<T> = ApiRequestError | ApiRequestSuccess<T>;
+export type ApiRequest<T> = ApiRequestError | ApiRequestSuccess<T>;
 
 export const API_URL = process.env.API_URL || 'http://localhost:3001';
 
