@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyJwt } from './lib/login/manage-login';
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
@@ -10,20 +9,16 @@ export const middleware = async (request: NextRequest) => {
   const shouldAuthenticate = isAdminPage && !isLoginPage;
   const shouldRedirectToLogin = shouldAuthenticate && isGetRequest;
 
-console.log(shouldRedirectToLogin, 'shouldRedirectToLogin')
-
   if (!shouldRedirectToLogin) {
     return NextResponse.next();
   }
 
-  const key =process.env.LOGIN_COOCKIE_NAME || 'loginSession'
-  console.log(key, 'key')
-  const jwtSession = request.cookies.get(    key
-  )?.value;
+  const key = process.env.LOGIN_COOCKIE_NAME || 'loginSession';
 
-  const isAuthenticated = !!jwtSession 
+  const jwtSession = request.cookies.get(key)?.value;
 
-  console.log(isAuthenticated, 'isAuthenticated')
+  const isAuthenticated = !!jwtSession;
+
   if (!isAuthenticated) {
     return NextResponse.redirect(new URL('/login', request.url));
   }

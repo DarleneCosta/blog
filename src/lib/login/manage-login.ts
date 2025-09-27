@@ -53,7 +53,6 @@ export async function getLoginSessionForApi() {
 
 export async function requireLoginSessionForApiOrRedirect() {
   const isAuthenticated = await getLoginSessionForApi();
-  console.log(isAuthenticated, 'isAuthenticated')
   if (!isAuthenticated) {
     redirect('/login');
   }

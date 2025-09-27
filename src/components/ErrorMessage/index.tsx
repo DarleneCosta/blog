@@ -16,7 +16,7 @@ export const ErrorMessage = ({
         className={clsx(
           'min-h-[320px]',
           'bg-slate-900',
-          'text-slave-100',
+          'text-slate-100',
           'mb-16 p-8 rounded-lg',
           'flex flex-col items-center justify-center',
           'text-center',

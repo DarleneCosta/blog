@@ -1,8 +1,8 @@
 import ManagePostForm from '@/components/admin/ManagePostForm';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { findPostByIdAdmin } from '@/lib/posts/queries/admin';
-import { makePartialPublicPost } from '@/dto/post/dto';
+import { findPostByIdFromApiAdmin } from '@/lib/posts/queries/admin';
+import { PublicPostForApiSchema } from '@/lib/posts/schemas';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,16 +16,16 @@ type AdminPostIdPageProps = {
 
 export default async function PostIdPage({ params }: AdminPostIdPageProps) {
   const { id } = await params;
-  const post = await findPostByIdAdmin(id).catch(() => undefined);
-  if (!post) {
+  const postResponse = await findPostByIdFromApiAdmin(id);
+  if (!postResponse.success) {
     notFound();
   }
-  const publicPost = makePartialPublicPost(post);
-
+  const publicPost = postResponse.data;
+  const publicPostSchema = PublicPostForApiSchema.parse(publicPost || {});
   return (
     <div className='flex flex-col gap-4 p-4'>
       <h1 className='text-xl font-bold'>Editar post</h1>
-      <ManagePostForm publicPost={publicPost} mode='update' />
+      <ManagePostForm publicPost={publicPostSchema} mode='update' />
     </div>
   );
 }

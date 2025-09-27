@@ -34,7 +34,7 @@ export function Menu() {
   const linkClasses = clsx(
     '[&>svg]:w-[16px] [&>svg]:h-[16px] px-4',
     'flex items-center justify-start gap-2 rounded-md',
-    'transition hover:text-slate-800 dark:hover:text-slate-300',
+    'transition hover:text-slate-300 dark:hover:text-slate-300',
     'h-10',
     'shrink-0',
   );
