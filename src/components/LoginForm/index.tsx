@@ -1,14 +1,15 @@
 'use client';
 
+import { useActionState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { loginAction } from '@/actions/login/login-action';
 import { Button } from '@/components/Button';
 import { InputText } from '@/components/InputText';
 import clsx from 'clsx';
 import { LogInIcon } from 'lucide-react';
-import { useActionState, useEffect } from 'react';
-import { toast } from 'react-toastify';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { HoneypotInput } from '../HoneypotInput';
 
 export function LoginForm() {
   const initialState = {
@@ -70,6 +71,7 @@ export function LoginForm() {
           disabled={isPending}
           required
         />
+        <HoneypotInput />
         <Button disabled={isPending} type='submit' className='mt-4'>
           <LogInIcon />
           {!isPending && 'Entrar'}

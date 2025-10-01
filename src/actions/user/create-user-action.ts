@@ -8,6 +8,7 @@ import {
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
 import { apiRequest } from '@/utils/api-request';
 import { redirect } from 'next/navigation';
+import { verifyHoneypotInput } from '@/utils/verify-honeypot-input';
 
 type CreateUserActionState = {
   user: PublicUserDto;
@@ -19,6 +20,14 @@ export async function createUserAction(
   state: CreateUserActionState,
   formData: FormData,
 ): Promise<CreateUserActionState> {
+  const isBot = await verifyHoneypotInput(formData);
+  if (isBot) {
+    return {
+      user: state.user,
+      errors: ['nice'],
+      success: false,
+    };
+  }
   if (!(formData instanceof FormData)) {
     return {
       user: state.user,

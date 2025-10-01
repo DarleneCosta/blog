@@ -5,6 +5,7 @@ import { LoginSchema } from '@/lib/login/schemas';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
 import { apiRequest } from '@/utils/api-request';
 import { redirect } from 'next/navigation';
+import { verifyHoneypotInput } from '@/utils/verify-honeypot-input';
 
 type LoginActionState = {
   email: string;
@@ -17,6 +18,14 @@ export async function loginAction(state: LoginActionState, formData: FormData) {
     return {
       email: '',
       errors: ['Login desabilitado'],
+    };
+  }
+
+  const isBot = await verifyHoneypotInput(formData);
+  if (isBot) {
+    return {
+      email: '',
+      errors: ['nice'],
     };
   }
 

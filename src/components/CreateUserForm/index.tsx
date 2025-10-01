@@ -7,6 +7,7 @@ import { useActionState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { createUserAction } from '@/actions/user/create-user-action';
 import { InputText } from '../InputText';
+import { HoneypotInput } from '../HoneypotInput';
 import clsx from 'clsx';
 
 export function CreateUserForm() {
@@ -65,6 +66,8 @@ export function CreateUserForm() {
           disabled={isPending}
           required
         />
+
+        <HoneypotInput />
 
         <Button disabled={isPending} type='submit' className='mt-4'>
           <UserRoundIcon />
