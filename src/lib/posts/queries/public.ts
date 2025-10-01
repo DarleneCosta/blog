@@ -1,32 +1,25 @@
-import { postRepository } from '@/repositories/post';
 import { cache } from 'react';
-import { notFound } from 'next/navigation';
-import { unstable_cache } from 'next/cache';
+import { PublicPostForApiDto } from '../schemas';
+import { PostModelFromApi } from '@/models/post/post-model';
+import { apiRequest } from '@/utils/api-request';
 
-export const findAllPublicPostsCached = cache(
-  unstable_cache(
-    async () => {
-      return await postRepository.findAllPublic();
-    },
-    ['posts'],
-    {
+export const findAllPuclicPostsFromApiCached = cache(async () => {
+  const result = await apiRequest<PublicPostForApiDto[]>(`/posts`, {
+    next: {
+      revalidate: 86400,
       tags: ['posts'],
     },
-  ),
-); //aqui deixei os dois caches mais somente para teste, mas o ideal é usar o cache do next.js
+  });
+  return result;
+});
 
-export const findPublicPostBySlugCached = cache((slug: string) => {
-  return unstable_cache(
-    async (slug: string) => {
-      const post = await postRepository
-        .findBySlugPublic(slug)
-        .catch(() => undefined);
-
-      if (!post) notFound();
-
-      return post;
+export const findPublicPostBySlugFromApiCached = cache(async (slug: string) => {
+  const postsResponse = await apiRequest<PostModelFromApi>(`/posts/${slug}`, {
+    next: {
+      tags: [`post-${slug}`],
+      revalidate: 86400,
     },
-    [`post-${slug}`],
-    { tags: [`post-${slug}`] },
-  )(slug);
+  });
+
+  return postsResponse;
 });

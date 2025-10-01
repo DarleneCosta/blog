@@ -8,6 +8,9 @@ type PostCoverImageProps = {
 };
 
 export function PostCoverImage({ imageProps, linkProps }: PostCoverImageProps) {
+  if (!imageProps.src) {
+    return null;
+  }
   return (
     <Link
       className={clsx(

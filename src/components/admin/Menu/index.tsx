@@ -9,6 +9,7 @@ import {
   LogOutIcon,
   MenuIcon,
   PlusIcon,
+  UserPenIcon,
 } from 'lucide-react';
 import { useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
@@ -76,6 +77,10 @@ export function Menu() {
       <Link href='/admin/post' className={linkClasses}>
         <FileTextIcon />
         Posts
+      </Link>
+      <Link className={linkClasses} href='/admin/user'>
+        <UserPenIcon />
+        Seus dados
       </Link>
       <Link href='/admin/post/new' className={linkClasses}>
         <PlusIcon />
