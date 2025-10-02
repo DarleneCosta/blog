@@ -2,7 +2,7 @@ import { PostModelFromApi } from '@/models/post/post-model';
 import { postRepository } from '@/repositories/post';
 import { cache } from 'react';
 import { notFound } from 'next/navigation';
-import { authenticatedApiRequest } from '@/utils/authenticate-api-request';
+import { authenticatedApiRequest } from '@/utils/authenticated-api-request';
 
 export const findPostByIdAdmin = cache(async (id: string) => {
   const post = await postRepository.findById(id);

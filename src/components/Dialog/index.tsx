@@ -11,7 +11,7 @@ type DialogProps = {
   disabled: boolean;
 };
 
-export default function Dialog({
+export function Dialog({
   isVisible = false,
   title,
   content,

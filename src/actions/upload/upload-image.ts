@@ -2,7 +2,7 @@
 
 import { getLoginSessionForApi } from '@/lib/login/manage-login';
 import { asyncDelay } from '@/utils/async-delay';
-import { authenticatedApiRequest } from '@/utils/authenticate-api-request';
+import { authenticatedApiRequest } from '@/utils/authenticated-api-request';
 
 const imageUploaderMaxSize =
   Number(process.env.NEXT_PUBLIC_IMAGE_UPLOADER_MAX_SIZE) || 900 * 1024;

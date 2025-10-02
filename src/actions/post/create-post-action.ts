@@ -6,7 +6,7 @@ import {
   PublicPostForApiDto,
   PublicPostForApiSchema,
 } from '@/lib/posts/schemas';
-import { authenticatedApiRequest } from '@/utils/authenticate-api-request';
+import { authenticatedApiRequest } from '@/utils/authenticated-api-request';
 import { getZodErrorMessages } from '@/utils/get-zod-error-messages';
 import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
