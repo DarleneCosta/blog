@@ -131,7 +131,7 @@ export function UpdateUserForm({ user }: UpdateUserFormProps) {
           <p>
             Ao apagar meu usuário, meus dados e todos os meus posts também serão
             excluídos. Essa ação é IRREVERSÍVEL. Em alguns segundos os botões
-            serão liberados. Clique em <b>OK</b> para confirmar ou{' '}
+            serão liberados. Clique em <b>Confirmar</b> se estiver certo ou{' '}
             <b>Cancelar</b> para fechar essa janela.
           </p>
         }

@@ -1,4 +1,5 @@
 import { SpinLoader } from '@/components/SpinLoader';
+import { UpdatePasswordForm } from '@/components/admin/UpdateUserPasswordForm';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default async function AdminUserPage() {
   return (
     <Suspense fallback={<SpinLoader className='mb-16' />}>
-      <h1>Update password form</h1>
+      <UpdatePasswordForm />
     </Suspense>
   );
 }

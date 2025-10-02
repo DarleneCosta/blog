@@ -23,7 +23,7 @@ export async function deleteUserAction(): Promise<DeleteUserActionState> {
   }
 
   const deleteUserResponse =
-    await authenticatedApiRequest<DeleteUserActionState>(`/user/me`, {
+    await authenticatedApiRequest<DeleteUserActionState>(`/users/me`, {
       method: 'DELETE',
     });
 
